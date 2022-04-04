@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Panel from 'react-bootstrap/lib/Panel'
-import axios from 'axios'
+import Panel from 'react-bootstrap/lib/Panel';
+import DatabaseConnector from './DatabaseConnector';
 
 //This Component is a child Component of Customers Component
 export default class CustomerDetails extends Component {
@@ -25,10 +25,9 @@ export default class CustomerDetails extends Component {
   }
 
   //Function to Load the customerdetails data from json.
-  getCustomerDetails(id) {
-    axios.get('assets/samplejson/customer' + id + '.json').then(response => {
-      this.setState({customerDetails: response})
-    })
+  async getCustomerDetails(id) {
+    const database = new DatabaseConnector();
+    this.setState({customerDetails: await database.getIndividualCustomer(id)})
   };
 
   render() {
