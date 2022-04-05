@@ -31,23 +31,23 @@ export default class CustomerDetails extends Component {
   };
 
   render() {
+    
     if (!this.state.customerDetails)
       return (<p>Loading Data</p>)
+
+    const customerDetailsData = this.state.customerDetails.data;
+
     return (<div className="customerdetails">
       <Panel bsStyle="info" className="centeralign">
         <Panel.Heading>
-          <Panel.Title componentClass="h3">{this.state.customerDetails.data.name}</Panel.Title>
+          <Panel.Title componentClass="h3">{customerDetailsData.name}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          <p>Name : {this.state.customerDetails.data.name}</p>
-          <p>Email : {this.state.customerDetails.data.email}</p>
-          <p>Phone : {this.state.customerDetails.data.phone}</p>
-          <p>City : {this.state.customerDetails.data.city}</p>
-          <p>State : {this.state.customerDetails.data.state}</p>
-          <p>Country : {this.state.customerDetails.data.country}</p>
-          <p>Organization : {this.state.customerDetails.data.organization}</p>
-          <p>Job Profile : {this.state.customerDetails.data.jobProfile}</p>
-          <p>Additional Info : {this.state.customerDetails.data.additionalInfo}</p>
+        {Object.keys(customerDetailsData).map(
+          (keyName, keyIndex)=><p key={keyName}>
+            {keyName}: {customerDetailsData[keyName]} 
+            </p>
+          )}
         </Panel.Body>
       </Panel>
     </div>)
